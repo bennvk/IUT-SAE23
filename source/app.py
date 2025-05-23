@@ -52,8 +52,13 @@ class CompetenceNiveau(db.Model):
 #####       ROUTES       #####
 ##############################
 
-def home():
-    return render_template('home.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/profil')
+def profil():
+    return render_template('profil.html')
 
 @app.route('/skills')
 def skills():
@@ -62,8 +67,8 @@ def skills():
         outerjoin(CompetenceNiveau).outerjoin(Niveau).all()
     return render_template('skills.html', data=data)
 
-@app.route('/add-skill', methods=['GET', 'POST'])
-def add_skill():
+@app.route('/form', methods=['GET', 'POST'])
+def form():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
 
@@ -86,7 +91,7 @@ def add_skill():
 
         return redirect(url_for('skills'))
 
-    return render_template('add_skill.html', blocs=blocs, niveaux=niveaux)
+    return render_template('form.html', blocs=blocs, niveaux=niveaux)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
