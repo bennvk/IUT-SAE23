@@ -20,7 +20,7 @@ class User(UserMixin, db.Model):
 def index():
     if 'username' in session:
         return f'Bonjour, {session["username"]}! <a href="/logout">Se déconnecter</a>'
-    return render_template('code/index.html')
+    return render_template('~/Documents/IUT-SAE23/code/index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -30,12 +30,12 @@ def login():
             session['username'] = user.username
             return redirect(url_for('index'))
         return 'Identifiants invalides'
-    return render_template('code/login.html')
+    return render_template('~/Documents/IUT-SAE23/code/login.html')
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('code/index'))
+    return redirect(url_for('~/Documents/IUT-SAE23/code/index'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -46,7 +46,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
-    return render_template('code/register.html')
+    return render_template('~/Documents/IUT-SAE23/code/register.html')
 
 def create_tables():
     db.create_all()
