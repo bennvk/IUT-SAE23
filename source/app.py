@@ -52,6 +52,13 @@ class CompetenceNiveau(db.Model):
 #####       ROUTES       #####
 ##############################
 
+@app.route('/get_blocs_by_semestre', methods=['POST'])
+def get_blocs_by_semestre():
+    semestre_id = request.form.get('semestre_id')
+    blocs = Bloc.query.filter_by(semestre_id=semestre_id).all()
+    bloc_data = [{"id": bloc.id, "code": bloc.code, "nom": bloc.nom} for bloc in blocs]
+    return {"blocs": bloc_data}
+
 @app.route('/about', methods=['GET', 'POST'])
 def about():
     if request.method == 'POST':
