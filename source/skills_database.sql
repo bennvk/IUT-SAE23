@@ -40,3 +40,21 @@ INSERT INTO niveaux (niveau) VALUES
 ('Presque acquis'),
 ('Acquis'),
 ('Expert');
+
+-- Pour semestre 1
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S1', 'Bloc 1 du semestre 1', 1),
+('B2S1', 'Bloc 2 du semestre 1', 1),
+('B3S1', 'Bloc 3 du semestre 1', 1);
+
+-- Pour semestre 2
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S2', 'Bloc 1 du semestre 2', 2),
+('B2S2', 'Bloc 2 du semestre 2', 2),
+('B3S2', 'Bloc 3 du semestre 2', 2);
+
+-- Pour semestre 3
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S3', 'Bloc 1 du semestre 3', 3),
+('B2S3', 'Bloc 2 du semestre 3', 3),
+('B3S3', 'Bloc 3 du semestre 3', 3);
