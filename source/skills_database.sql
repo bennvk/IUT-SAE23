@@ -58,3 +58,21 @@ INSERT INTO blocs (code, nom, semestre_id) VALUES
 ('B1S3', 'Bloc 1 du semestre 3', 3),
 ('B2S3', 'Bloc 2 du semestre 3', 3),
 ('B3S3', 'Bloc 3 du semestre 3', 3);
+
+-- Pour semestre 1
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S4', 'Bloc 1 du semestre 1', 4),
+('B2S4', 'Bloc 2 du semestre 1', 4),
+('B3S4', 'Bloc 3 du semestre 1', 4);
+
+-- Pour semestre 2
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S5', 'Bloc 1 du semestre 2', 5),
+('B2S5', 'Bloc 2 du semestre 2', 5),
+('B3S5', 'Bloc 3 du semestre 2', 5);
+
+-- Pour semestre 3
+INSERT INTO blocs (code, nom, semestre_id) VALUES
+('B1S6', 'Bloc 1 du semestre 3', 6),
+('B2S6', 'Bloc 2 du semestre 3', 6),
+('B3S6', 'Bloc 3 du semestre 3', 6);
