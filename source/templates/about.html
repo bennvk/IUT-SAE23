@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -16,7 +17,8 @@
         <link href="static/css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
-        <!-- Navigation-->
+
+<!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">Clarence Taylor</span>
@@ -33,9 +35,11 @@
                 </ul>
             </div>
         </nav>
-        <!-- Page Content-->
+
+<!-- Page Content-->
         <div class="container-fluid p-0">
-            <!-- About-->
+
+<!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
                     <h1 class="mb-0">
@@ -55,12 +59,13 @@
                 </div>
             </section>
             <hr class="m-0" />
-            <!-- Profil -->
+
+<!-- Profil -->
             <section class="resume-section" id="profil">
                 <div class="resume-section-content">
                   <h2 class="mb-5">Présentation</h2>
               
-                  <!-- Étudiant 1 -->
+<!-- Étudiant 1 -->
                   <div class="card mb-4 shadow-sm" style="border: 2px solid #bd5d38; border-radius: 12px;">
                     <div class="card-body d-flex align-items-center">
                       <img src="etudiant1.jpg" alt="Photo Étudiant 1" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-right: 20px;">
@@ -72,7 +77,7 @@
                     </div>
                   </div>
               
-                  <!-- Étudiant 2 -->
+<!-- Étudiant 2 -->
                   <div class="card mb-4 shadow-sm" style="border: 2px solid #bd5d38; border-radius: 12px;">
                     <div class="card-body d-flex align-items-center">
                       <img src="etudiant2.jpg" alt="Photo Étudiant 2" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-right: 20px;">
@@ -87,12 +92,13 @@
                 </div>
               </section>
               
-              <hr class="m-0" />              
-            <!-- Skills -->
-            <section class="resume-section" id="skills">
+              <hr class="m-0" /> 
+
+<!-- Skills -->
+              <section class="resume-section" id="skills">
                 <div class="resume-section-content">
                   <h2 class="mb-5">Tableau des compétences</h2>
-                  <div style="overflow-x: auto;">
+                 <div style="overflow-x: auto;">
                     <table style="
                       width: 100%;
                       max-width: 900px;
@@ -112,64 +118,73 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% for competence, bloc, semestre, niveau in data %}
                         <tr>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">S1</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">B2</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">Télécommunications</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">Expert</td>
+                          <td style="padding: 10px; border: 1px solid #f0f0f0;">{{ semestre.code }}</td>
+                          <td style="padding: 10px; border: 1px solid #f0f0f0;">{{ bloc.code }}</td>
+                          <td style="padding: 10px; border: 1px solid #f0f0f0;">{{ competence.nom }}</td>
+                          <td style="padding: 10px; border: 1px solid #f0f0f0;">{{ niveau.niveau if niveau else "Non défini" }}</td>
                         </tr>
-                        <tr>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">S2</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">B1</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">Réseaux</td>
-                          <td style="padding: 10px; border: 1px solid #f0f0f0;">Confirmé</td>
-                        </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
                 </div>
               </section>
+
               
-              <hr class="m-0" />              
-            <!-- form -->
+              <hr class="m-0" />
+
+<!-- form -->
             <section class="resume-section" id="form">
                 <div class="resume-section-content">
                   <h2 class="mb-5">Ajouter une compétence</h2>
                   
-                  <form style="max-width: 800px; margin: 0 auto; padding: 30px; background-color: #fefefe; border: 2px solid #a04324; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <div class="form-group mb-4">
-                      <label for="semestre">Semestre</label>
-                      <input type="text" class="form-control" id="semestre" placeholder="Ex: S1">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                      <label for="bloc">Bloc</label>
-                      <input type="text" class="form-control" id="bloc" placeholder="Ex: B2">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                      <label for="competence">Compétence</label>
-                      <input type="text" class="form-control" id="competence" placeholder="Ex: Télécommunications">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                      <label for="niveau">Niveau</label>
-                      <select class="form-control" id="niveau">
-                        <option>Non acquis</option>
-                        <option>En cours d'acquisition</option>
-                        <option>Presque acquis</option>
-                        <option>Acquis</option>
-                        <option>Expert</option>
+<form method="POST" style="max-width: 800px; margin: 0 auto; padding: 30px; background-color: #fefefe; border: 2px solid #a04324; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  
+  <!-- Semestre -->
+                 <div class="form-group mb-4">
+                    <label for="semestre_id">Semestre</label>
+                    <select class="form-control" id="semestre_id" name="semestre_id" required>
+                      {% for semestre in semestres %}
+                      <option value="{{ semestre.id }}">{{ semestre.code }} - {{ semestre.nom }}</option>
+                     {% endfor %}
+                    </select>
+                  </div>
+
+  <!-- Bloc -->
+                  <div class="form-group mb-4">
+                    <label for="bloc_id">Bloc</label>
+                      <select class="form-control" id="bloc_id" name="bloc_id" required>
+                      {% for bloc in blocs %}
+                      <option value="{{ bloc.id }}">{{ bloc.code }} - {{ bloc.nom }}</option>
+                      {% endfor %}
                       </select>
-                    </div>
-                    
-                    <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">Ajouter</button>
-                  </form>
-                </div>
-              </section>
-              
-              <hr class="m-0" />              
-            <!-- Interests-->
+                  </div>
+
+  <!-- Compétence -->
+                  <div class="form-group mb-4">
+                    <label for="nom">Compétence</label>
+                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Télécommunications" required>
+                  </div>
+
+  <!-- Niveau -->
+                  <div class="form-group mb-4">
+                    <label for="niveau_id">Niveau</label>
+                      <select class="form-control" id="niveau_id" name="niveau_id" required>
+                        {% for niveau in niveaux %}
+                        <option value="{{ niveau.id }}">{{ niveau.niveau }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+
+                <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">Ajouter</button>
+
+</form>
+        
+<hr class="m-0" />
+            
+<!-- Interests-->
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Interests</h2>
