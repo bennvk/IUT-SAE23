@@ -145,50 +145,56 @@
 
 <!-- form -->
             <section class="resume-section" id="form">
-                <div class="resume-section-content">
-                  <h2 class="mb-5">Ajouter une compétence</h2>
-                  
-<form method="POST" style="max-width: 800px; margin: 0 auto; padding: 30px; background-color: #fefefe; border: 2px solid #a04324; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  
-  <!-- Semestre -->
-                 <div class="form-group mb-4">
-                    <label for="semestre_id">Semestre</label>
-                    <select class="form-control" id="semestre_id" name="semestre_id" required>
-                      {% for semestre in semestres %}
-                      <option value="{{ semestre.id }}">{{ semestre.code }} - {{ semestre.nom }}</option>
-                     {% endfor %}
-                    </select>
-                  </div>
+              <div class="resume-section-content">
+                <h2 class="mb-5">Ajouter une compétence</h2>
 
-  <!-- Bloc -->
-                  <div class="form-group mb-4">
-                    <label for="bloc_id">Bloc</label>
-                      <select class="form-control" id="bloc_id" name="bloc_id" required>
-                      {% for bloc in blocs %}
-                      <option value="{{ bloc.id }}">{{ bloc.code }} - {{ bloc.nom }}</option>
-                      {% endfor %}
-                      </select>
-                  </div>
+                <form method="POST" style="max-width: 800px; margin: 0 auto; padding: 30px; background-color: #fefefe; border: 2px solid #a04324; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 
-  <!-- Compétence -->
-                  <div class="form-group mb-4">
-                    <label for="nom">Compétence</label>
-                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Télécommunications" required>
-                  </div>
+ <!-- Semestre -->
+<div class="form-group mb-4">
+        <label for="semestre_id">Semestre</label>
+        <select class="form-control" id="semestre_id" name="semestre_id" required>
+          <option value="" disabled selected>-- Choisir un semestre --</option>
+          {% for semestre in semestres %}
+          <option value="{{ semestre.id }}">{{ semestre.code }} - {{ semestre.nom }}</option>
+          {% endfor %}
+        </select>
+      </div>
 
-  <!-- Niveau -->
-                  <div class="form-group mb-4">
-                    <label for="niveau_id">Niveau</label>
-                      <select class="form-control" id="niveau_id" name="niveau_id" required>
-                        {% for niveau in niveaux %}
-                        <option value="{{ niveau.id }}">{{ niveau.niveau }}</option>
-                        {% endfor %}
-                      </select>
-                  </div>
+      <!-- Bloc -->
+      <div class="form-group mb-4">
+        <label for="bloc_id">Bloc</label>
+        <select class="form-control" id="bloc_id" name="bloc_id" required>
+          <option value="" disabled selected>-- Choisir un bloc --</option>
+          {% for bloc in blocs %}
+          <option value="{{ bloc.id }}">{{ bloc.code }} - {{ bloc.nom }}</option>
+          {% endfor %}
+        </select>
+      </div>
 
-                <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">Ajouter</button>
+      <!-- Compétence -->
+      <div class="form-group mb-4">
+        <label for="nom">Compétence</label>
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Télécommunications" required>
+      </div>
 
-</form>
+      <!-- Niveau -->
+      <div class="form-group mb-4">
+        <label for="niveau_id">Niveau</label>
+        <select class="form-control" id="niveau_id" name="niveau_id" required>
+          <option value="" disabled selected>-- Choisir un niveau --</option>
+          {% for niveau in niveaux %}
+          <option value="{{ niveau.id }}">{{ niveau.niveau }}</option>
+          {% endfor %}
+           </select>
+              </div>
+
+                  <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">Ajouter</button>
+
+                </form>
+              </div>
+            </section>
+
         
 <hr class="m-0" />
             
