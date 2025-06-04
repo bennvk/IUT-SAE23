@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -6,6 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'secret_key_change_this'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sae:progtr00@localhost/skills_database'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+users_db = {}
 
 db = SQLAlchemy(app)
 
@@ -47,6 +50,13 @@ class CompetenceNiveau(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     competence_id = db.Column(db.Integer, db.ForeignKey('competences.id'), nullable=False)
     niveau_id = db.Column(db.Integer, db.ForeignKey('niveaux.id'), nullable=False)
+
+class User(db.Model):
+    __tablename__ = 'users'  # nom de la table en base
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
 ##############################
 #####       ROUTES       #####
@@ -91,20 +101,42 @@ def about():
 
     return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if User.query.filter_by(username=username).first():
+            flash("Nom d'utilisateur déjà utilisé.")
+            return redirect(url_for('register'))
+
+        new_user = User(username=username, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Compte créé avec succès.")
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        if request.form['username'] == 'admin' and request.form['password'] == 'admin':
-            session['logged_in'] = True
-            return redirect(url_for('home'))
+        user = User.query.filter_by(username=request.form['username']).first()
+        if user and user.password == request.form['password']:
+            session['username'] = user.username
+            return redirect(url_for('about'))
         else:
-            return "Nom d'utilisateur ou mot de passe incorrect"
+            flash('Identifiants invalides')
+            return redirect(url_for('login'))
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
-    return redirect(url_for('home'))
+    session.pop('username', None)
+    flash("Déconnexion réussie.")
+    return redirect(url_for('about'))
 
 ##############################
 #####      APP RUN       #####
