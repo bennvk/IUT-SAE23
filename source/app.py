@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -71,6 +71,7 @@ def get_blocs_by_semestre():
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
+
     if request.method == 'POST':
         code = request.form.get('code')
         nom = request.form.get('nom')
@@ -108,14 +109,12 @@ def register():
         password = request.form['password']
 
         if User.query.filter_by(username=username).first():
-            flash("Nom d'utilisateur déjà utilisé.")
             return redirect(url_for('register'))
 
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Compte créé avec succès.")
         return redirect(url_for('login'))
 
     return render_template('register.html')
@@ -128,14 +127,12 @@ def login():
             session['username'] = user.username
             return redirect(url_for('about'))
         else:
-            flash('Identifiants invalides')
             return redirect(url_for('login'))
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    flash("Déconnexion réussie.")
     return redirect(url_for('about'))
 
 ##############################
