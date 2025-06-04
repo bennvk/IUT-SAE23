@@ -1,29 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un compte</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Créer un compte</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Muli', sans-serif;
+      background-color: #fefefe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .register-page-container {
+      border: 2px solid #bd5d38;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background-color: white;
+    }
+
+    .register-page-title {
+      font-family: 'Multi', sans-serif;
+      font-weight: 700;
+      color: #bd5d38;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .register-form-control {
+      border-radius: 25px;
+      border: 1.5px solid #bd5d38;
+      padding: 12px 20px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .register-form-control:focus {
+      border-color: #802e15;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .register-btn {
+      background-color: #4CAF50; /* vert "success" */
+      color: white;
+      border-radius: 25px;
+      padding: 10px 0;
+      font-weight: 700;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background-color: #357a38;
+      color: white;
+    }
+
+    .flash-messages {
+      color: red;
+      margin-bottom: 20px;
+      font-weight: 600;
+      padding-left: 15px;
+    }
+
+    @media (max-width: 576px) {
+      .register-page-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="register-page-container">
+    <h2 class="register-page-title">Créer un compte</h2>
 
-<h2>Créer un compte</h2>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: red;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-<form method="post">
-    <input name="username" class="form-control mb-2" placeholder="Nom d'utilisateur" required>
-    <input name="password" type="password" class="form-control mb-2" placeholder="Mot de passe" required>
-    <button type="submit" class="btn btn-success">S'enregistrer</button>
-</form>
-
+    <form method="post">
+      <input
+        type="text"
+        name="username"
+        class="register-form-control"
+        placeholder="Nom d'utilisateur"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        class="register-form-control"
+        placeholder="Mot de passe"
+        required
+      />
+      <button type="submit" class="register-btn">S'enregistrer</button>
+    </form>
+  </div>
 </body>
 </html>
