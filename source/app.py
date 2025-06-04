@@ -100,7 +100,11 @@ def about():
     .outerjoin(Niveau, Niveau.id == CompetenceNiveau.niveau_id) \
     .all()
 
-    return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
+    if 'username' in session:
+        return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
+    else :
+        return render_template('about.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
