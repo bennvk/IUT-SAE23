@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte</title>
+</head>
+<body>
+
+<h2>Créer un compte</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: red;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<form method="post">
+    <input name="username" class="form-control mb-2" placeholder="Nom d'utilisateur" required>
+    <input name="password" type="password" class="form-control mb-2" placeholder="Mot de passe" required>
+    <button type="submit" class="btn btn-success">S'enregistrer</button>
+</form>
+
+</body>
+</html>
