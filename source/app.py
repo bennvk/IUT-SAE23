@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -9,7 +8,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sae:progtr00@localhost/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 users_db = {}
-
 db = SQLAlchemy(app)
 
 ##############################
@@ -52,8 +50,7 @@ class CompetenceNiveau(db.Model):
     niveau_id = db.Column(db.Integer, db.ForeignKey('niveaux.id'), nullable=False)
 
 class User(db.Model):
-    __tablename__ = 'users'  # nom de la table en base
-
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
@@ -108,8 +105,6 @@ def about():
         return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
     else:
         return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
-
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
