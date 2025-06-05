@@ -114,8 +114,6 @@
 
 <hr class="m-0" />
 
-
-
 <!-- Skills -->
 <section class="resume-section" id="skills">
   <div class="resume-section-content">
@@ -125,7 +123,7 @@
           width: 100%;
           max-width: 900px;
           margin: 0 auto;
-          border-collapse: separate;
+          border-collapse: separate;  
           border-spacing: 0;
           border-radius: 12px;
           overflow: hidden;
@@ -207,8 +205,27 @@
   </div>
 
     <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">Ajouter</button>
+  </form>
 
-    </form>
+<form method="POST" action="{{ url_for('supprimer_competence') }}" style="max-width: 800px; margin: 40px auto; padding: 30px; background-color: #fefefe; border: 2px solid #a04324; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" onsubmit="return confirm('Supprimer cette compétence ?');">
+
+  <div class="form-group mb-4">
+    <label for="competence_id">Choisir une compétence à supprimer</label>
+    <select class="form-control" id="competence_id" name="competence_id" required>
+      <option value="" disabled selected>-- Sélectionner une compétence --</option>
+      {% for competence, bloc, semestre, niveau in data %}
+      <option value="{{ competence.id }}">
+        {{ semestre.code }} - {{ bloc.code }} - {{ competence.nom }} ({{ niveau.niveau if niveau else "Non défini" }})
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn" style="background-color: #bd5d38; color: white;">
+    Supprimer
+  </button>
+</form>
+
   </div>
 </section>
 
