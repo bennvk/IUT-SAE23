@@ -106,6 +106,14 @@ def about():
     else:
         return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
 
+@app.route('/delete-competence', methods=['POST'])
+def supprimer_competence():
+    competence_id = request.form.get('competence_id')
+    competence = Competence.query.get_or_404(competence_id)
+    db.session.delete(competence)
+    db.session.commit()
+    return redirect(url_for('about'))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
