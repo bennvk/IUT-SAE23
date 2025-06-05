@@ -73,6 +73,10 @@ def get_blocs_by_semestre():
 def about():
 
     if request.method == 'POST':
+        if 'username' not in session:
+            return redirect(url_for('login'))
+
+    if request.method == 'POST':
         code = request.form.get('code')
         nom = request.form.get('nom')
         bloc_id = int(request.form.get('bloc_id'))
@@ -102,8 +106,9 @@ def about():
 
     if 'username' in session:
         return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
-    else :
-        return render_template('about.html')
+    else:
+        return render_template('about.html', data=data, semestres=semestres, blocs=blocs, niveaux=niveaux)
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
