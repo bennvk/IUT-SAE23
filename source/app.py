@@ -44,6 +44,14 @@ class Niveau(db.Model):
     niveau = db.Column(db.String(50), unique=True, nullable=False)
     competences = db.relationship('CompetenceNiveau', backref='niveau')
 
+with app.app_context():
+    if Niveau.query.count() == 0:
+        niveaux_a_ajouter = ['A - Expert', 'B - C - Presque acquis', 'D - Acquisition en cours', 'E - Non acquis']
+        for nom_niveau in niveaux_a_ajouter:
+            niveau = Niveau(niveau=nom_niveau)
+            db.session.add(niveau)
+        db.session.commit()
+
 class CompetenceNiveau(db.Model):
     __tablename__ = 'competences_niveaux'
     id = db.Column(db.Integer, primary_key=True)
@@ -124,7 +132,7 @@ def register():
         if User.query.filter_by(username=username).first():
             return redirect(url_for('register'))
 
-        # Hasher le mot de passe
+#Sécurité mot de passe
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
 
         new_user = User(username=username, password=hashed_password)
